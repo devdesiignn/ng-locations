@@ -14,10 +14,10 @@ This release is a full rewrite and rename of the original `use-nigeria-location`
 
 ### Changed
 
-- **Package renamed** from `use-nigeria-location` to `nigeria-locations`
+- **Package renamed** from `use-nigeria-location` to `ng-locations`
 - **All functions renamed** — the `use` prefix has been dropped in favour of `get`, and abbreviations have been expanded for clarity:
 
-  | Before (`use-nigeria-location`) | After (`nigeria-locations`) |
+  | Before (`use-nigeria-location`) | After (`ng-locations`) |
   |---|---|
   | `useAllStatesInfo` | `getAllStatesInfo` |
   | `useAllStates` | `getAllStates` |
@@ -56,7 +56,7 @@ This release is a full rewrite and rename of the original `use-nigeria-location`
 
 ```bash
 npm uninstall use-nigeria-location
-npm install nigeria-locations
+npm install ng-locations
 ```
 
 ### 2. Update your imports
@@ -66,7 +66,7 @@ npm install nigeria-locations
 import { useAllStates, useStateCapital, useSingleLGA } from "use-nigeria-location";
 
 // After
-import { getAllStates, getStateCapital, getLGA } from "nigeria-locations";
+import { getAllStates, getStateCapital, getLGA } from "ng-locations";
 ```
 
 ### 3. Update function calls — signatures are the same, names changed

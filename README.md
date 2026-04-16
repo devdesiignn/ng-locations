@@ -1,9 +1,9 @@
-# nigeria-locations
+# ng-locations
 
 > A zero-dependency TypeScript library for querying Nigerian states, LGAs, universities, airports, land mass, and geo-political zones. Works anywhere JavaScript runs — Node.js, React, Vue, Svelte, or plain JS.
 
-[![npm version](https://img.shields.io/npm/v/nigeria-locations)](https://www.npmjs.com/package/nigeria-locations)
-[![license](https://img.shields.io/npm/l/nigeria-locations)](./LICENSE)
+[![npm version](https://img.shields.io/npm/v/ng-locations)](https://www.npmjs.com/package/ng-locations)
+[![license](https://img.shields.io/npm/l/ng-locations)](./LICENSE)
 [![TypeScript](https://img.shields.io/badge/TypeScript-ready-blue)](https://www.typescriptlang.org/)
 
 ---
@@ -11,11 +11,11 @@
 ## Install
 
 ```bash
-npm install nigeria-locations
+npm install ng-locations
 # or
-yarn add nigeria-locations
+yarn add ng-locations
 # or
-pnpm add nigeria-locations
+pnpm add ng-locations
 ```
 
 ---
@@ -38,7 +38,7 @@ pnpm add nigeria-locations
 All functions that take a state or LGA identifier accept either the **name** or the **UUID**. Input is sanitized internally (trimmed and lowercased), so any casing or extra spaces work fine.
 
 ```ts
-import { getStateCapital } from "nigeria-locations";
+import { getStateCapital } from "ng-locations";
 
 getStateCapital("Lagos")                              // "Ikeja"
 getStateCapital("lagos")                              // "Ikeja"
@@ -51,7 +51,7 @@ getStateCapital("3ac495b8-4196-4126-bf9e-bb8d43a0355d") // "Yola"
 ### Get all states info
 
 ```ts
-import { getAllStatesInfo } from "nigeria-locations";
+import { getAllStatesInfo } from "ng-locations";
 
 getAllStatesInfo();
 // => [
@@ -72,7 +72,7 @@ getAllStatesInfo();
 ### Get all states (name + ID only)
 
 ```ts
-import { getAllStates } from "nigeria-locations";
+import { getAllStates } from "ng-locations";
 
 getAllStates();
 // => [
@@ -85,7 +85,7 @@ getAllStates();
 ### Get full info for a single state
 
 ```ts
-import { getStateInfo } from "nigeria-locations";
+import { getStateInfo } from "ng-locations";
 
 getStateInfo("Lagos");
 // => { name: "Lagos", capital: "Ikeja", id: "...", lgas: [...], ... }
@@ -97,7 +97,7 @@ getStateInfo("not-a-state");
 ### Get a state (name + ID only)
 
 ```ts
-import { getState } from "nigeria-locations";
+import { getState } from "ng-locations";
 
 getState("Lagos");
 // => { name: "Lagos", id: "..." }
@@ -106,7 +106,7 @@ getState("Lagos");
 ### Get capital of a state
 
 ```ts
-import { getStateCapital } from "nigeria-locations";
+import { getStateCapital } from "ng-locations";
 
 getStateCapital("Ogun"); // => "Abeokuta"
 ```
@@ -114,7 +114,7 @@ getStateCapital("Ogun"); // => "Abeokuta"
 ### Get land mass of a state
 
 ```ts
-import { getStateLandMass } from "nigeria-locations";
+import { getStateLandMass } from "ng-locations";
 
 getStateLandMass("Rivers"); // => "11,077 km²"
 ```
@@ -122,7 +122,7 @@ getStateLandMass("Rivers"); // => "11,077 km²"
 ### Get geo-political zone of a state
 
 ```ts
-import { getStateGeoPoliticalZone } from "nigeria-locations";
+import { getStateGeoPoliticalZone } from "ng-locations";
 
 getStateGeoPoliticalZone("Kano"); // => "North West"
 ```
@@ -130,7 +130,7 @@ getStateGeoPoliticalZone("Kano"); // => "North West"
 ### Get all LGAs in a state
 
 ```ts
-import { getStateLGAs } from "nigeria-locations";
+import { getStateLGAs } from "ng-locations";
 
 getStateLGAs("Abia");
 // => [
@@ -143,7 +143,7 @@ getStateLGAs("Abia");
 ### Get a single LGA
 
 ```ts
-import { getLGA } from "nigeria-locations";
+import { getLGA } from "ng-locations";
 
 // By state name + LGA name
 getLGA("Abia", "Aba South");
@@ -161,7 +161,7 @@ getLGA("Abia", "4c840cb1-...");
 ### Get all universities in a state
 
 ```ts
-import { getStateUniversities } from "nigeria-locations";
+import { getStateUniversities } from "ng-locations";
 
 getStateUniversities("Abia");
 // => [
@@ -173,7 +173,7 @@ getStateUniversities("Abia");
 ### Get all airports in a state
 
 ```ts
-import { getStateAirports } from "nigeria-locations";
+import { getStateAirports } from "ng-locations";
 
 getStateAirports("Lagos");
 // => [
@@ -229,7 +229,7 @@ type TAirport = { name: string; IATA_code: string; type: string };
 ## CommonJS usage
 
 ```js
-const { getAllStates, getStateCapital } = require("nigeria-locations");
+const { getAllStates, getStateCapital } = require("ng-locations");
 ```
 
 ---

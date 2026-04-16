@@ -1,10 +1,10 @@
 /**
  * @author Muiz Haruna (devdesiignn) <hmuiyze@gmail.com>
- * @package nigeria-locations
+ * @package ng-locations
  */
 
 import { TState, TLGA, TStateInfo, TUniversity, TAirport } from "@/types";
-import { NigeriaLocations } from "@/data/nigeria-locations";
+import { NigeriaLocations } from "@/data/ng-locations";
 
 /**
  * Sanitizes a lookup key — trims whitespace and lowercases.
@@ -24,10 +24,7 @@ function sanitize(value: string): string {
 function findState(idOrName: string): TStateInfo | undefined {
   const key = sanitize(idOrName);
   return NigeriaLocations.find((location) => {
-    return (
-      location.state.id === key ||
-      location.state.name.toLowerCase() === key
-    );
+    return location.state.id === key || location.state.name.toLowerCase() === key;
   })?.state;
 }
 
@@ -155,10 +152,7 @@ export function getLGA(stateIdOrName: string, lgaIdOrName: string): TLGA | strin
   const state = findState(stateIdOrName);
   if (!state) return "State not found. Check the ID or name passed.";
 
-  return (
-    findLGA(state.lgas, lgaIdOrName) ??
-    "LGA not found. Check the ID or name passed."
-  );
+  return findLGA(state.lgas, lgaIdOrName) ?? "LGA not found. Check the ID or name passed.";
 }
 
 // ─── University queries ───────────────────────────────────────────────────────

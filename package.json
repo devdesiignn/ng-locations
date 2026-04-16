@@ -1,5 +1,5 @@
 {
-  "name": "nigeria-locations",
+  "name": "ng-locations",
   "version": "1.0.0",
   "description": "A zero-dependency TypeScript library for querying Nigerian states, LGAs, airports, universities, land mass, and geo-political zones.",
   "main": "./dist/index.js",
@@ -36,9 +36,9 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/devdesiignn/nigeria-locations.git"
+    "url": "git+https://github.com/devdesiignn/ng-locations.git"
   },
-  "homepage": "https://github.com/devdesiignn/nigeria-locations#readme",
+  "homepage": "https://github.com/devdesiignn/ng-locations#readme",
   "author": "Muiz Haruna (devdesiignn) <hmuiyze@gmail.com>",
   "license": "MIT",
   "devDependencies": {
