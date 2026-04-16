@@ -1,11 +1,3 @@
-export type TLocation = {
-  state: TState;
-};
-
-export type TLocationInfo = {
-  state: TStateInfo;
-};
-
 export type TStateInfo = {
   name: string;
   capital: string;
@@ -17,15 +9,7 @@ export type TStateInfo = {
   geopolitical_zone: string;
 };
 
-export type TState = Omit<
-  TStateInfo,
-  | "capital"
-  | "lgas"
-  | "land_mass"
-  | "universities"
-  | "airports"
-  | "geopolitical_zone"
->;
+export type TState = Pick<TStateInfo, "name" | "id">;
 
 export type TLGA = { name: string; id: string };
 
@@ -39,4 +23,12 @@ export type TAirport = {
   name: string;
   IATA_code: string;
   type: string;
+};
+
+export type TLocationInfo = {
+  state: TStateInfo;
+};
+
+export type TLocation = {
+  state: TState;
 };

@@ -7,4 +7,13 @@ export default defineConfig({
   shims: true,
   skipNodeModulesBundle: true,
   clean: true,
+  target: "es2020",
+  sourcemap: true,
+  treeshake: true,
+
+  esbuildOptions(options) {
+    options.alias = {
+      "@": "./src",
+    };
+  },
 });

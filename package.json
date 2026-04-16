@@ -1,32 +1,50 @@
 {
-  "name": "use-nigeria-location",
+  "name": "nigeria-locations",
   "version": "1.0.0",
+  "description": "A zero-dependency TypeScript library for querying Nigerian states, LGAs, airports, universities, land mass, and geo-political zones.",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
   "scripts": {
-    "build": "tsup"
+    "build": "tsup",
+    "test": "vitest run",
+    "test:watch": "vitest"
   },
   "keywords": [
-    "Nigeria",
-    "States",
-    "Capital",
-    "LGAs",
-    "Universities",
-    "Airports",
-    "Land Mass",
-    "Geo Political Zone"
+    "nigeria",
+    "nigerian",
+    "states",
+    "lga",
+    "local-government",
+    "capital",
+    "universities",
+    "airports",
+    "land-mass",
+    "geo-political-zone",
+    "location",
+    "africa"
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/devdesiignn/use-nigeria-location.git"
+    "url": "git+https://github.com/devdesiignn/nigeria-locations.git"
   },
-  "homepage": "https://github.com/devdesiignn/use-nigeria-location#readme",
-  "author": "DEVDESIIGNN",
+  "homepage": "https://github.com/devdesiignn/nigeria-locations#readme",
+  "author": "Muiz Haruna (devdesiignn) <hmuiyze@gmail.com>",
   "license": "MIT",
-  "description": "Custom hooks that provides you the list of all States, LGAs, Airports, Universities in Nigeria.",
   "devDependencies": {
+    "@types/node": "^25.6.0",
     "tsup": "^8.1.0",
-    "typescript": "^5.5.3"
+    "typescript": "^5.5.3",
+    "vitest": "^4.1.4"
   }
 }

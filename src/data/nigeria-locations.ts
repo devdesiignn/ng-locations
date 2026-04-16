@@ -1,4 +1,4 @@
-import { TLocationInfo } from "../types";
+import { TLocationInfo } from "@/types";
 
 export const NigeriaLocations: TLocationInfo[] = [
   {

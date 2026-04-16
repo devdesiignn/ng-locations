@@ -1,220 +1,239 @@
-# use-nigeria-location
+# nigeria-locations
 
-> Custom hooks that provides you the list of all States, LGAs, Airports, Universities, Land mass, Geo-Political zones in Nigeria.
+> A zero-dependency TypeScript library for querying Nigerian states, LGAs, universities, airports, land mass, and geo-political zones. Works anywhere JavaScript runs — Node.js, React, Vue, Svelte, or plain JS.
 
-Follow this project's author, [Muiz Haruna](https://github.com/devdesiignn/), and give the project a star ⭐ to show your appreciation and recommend to your friends.
+[![npm version](https://img.shields.io/npm/v/nigeria-locations)](https://www.npmjs.com/package/nigeria-locations)
+[![license](https://img.shields.io/npm/l/nigeria-locations)](./LICENSE)
+[![TypeScript](https://img.shields.io/badge/TypeScript-ready-blue)](https://www.typescriptlang.org/)
+
+---
 
 ## Install
 
-Install with [npm](https://www.npmjs.com/)
-
-```sh
-npm install use-nigeria-location
+```bash
+npm install nigeria-locations
+# or
+yarn add nigeria-locations
+# or
+pnpm add nigeria-locations
 ```
+
+---
+
+## Key Features
+
+- **Search by name or ID** — pass a state name like `"Lagos"` or its UUID interchangeably
+- **Input sanitization** — leading/trailing spaces and casing are handled automatically, so `"  lagos  "`, `"LAGOS"`, and `"Lagos"` all work
+- **Full TypeScript support** — all functions and return types are fully typed
+- **Zero dependencies** — no external packages required
+- **Framework-agnostic** — works in Node.js, React, Vue, Svelte, or any JS environment
+- **Dual package** — ships as both ESM and CommonJS
+
+---
 
 ## Usage
 
-### Fetch all information from all states
+### Lookup by name or ID
 
-```js
-import { useAllStatesInfo } from "use-nigeria-location";
+All functions that take a state or LGA identifier accept either the **name** or the **UUID**. Input is sanitized internally (trimmed and lowercased), so any casing or extra spaces work fine.
 
-console.log(useAllStatesInfo())
-/* => 
-[{
-  name: "Abia",
-  capital: "Umuahia",
-  id: "2e14a7ed-349a-44f6-9e12-abfec3e5f6ed",
-  lgas: [
-  { name: "Aba South", id: "4c840cb1-8f58-40d3-9aff-5a3b77fdba71" },
+```ts
+import { getStateCapital } from "nigeria-locations";
 
-  ... ],
-  land_mass: "6,320 km²",
-  universities: 
-  [
-    {
-      name: "Abia State University",
-      location: "Uturu",
-      type: "State",
-    },
-
-  ... ],
-  airports: [],
-  geopolitical_zone: "South East",
-}, 
-
-... ]
-*/
+getStateCapital("Lagos")                              // "Ikeja"
+getStateCapital("lagos")                              // "Ikeja"
+getStateCapital("  LAGOS  ")                          // "Ikeja"
+getStateCapital("3ac495b8-4196-4126-bf9e-bb8d43a0355d") // "Yola"
 ```
 
-### Fetch all information from single state
+---
 
-```js
-import { useStateInfo } from "use-nigeria-location";
+### Get all states info
 
-// takes state ID parameter
+```ts
+import { getAllStatesInfo } from "nigeria-locations";
 
-console.log(useStateInfo("2e14a7ed-349a-44f6-9e12-abfec3e5f6ed"))
-/* => 
-{
-  name: "Abia",
-  capital: "Umuahia",
-  id: "2e14a7ed-349a-44f6-9e12-abfec3e5f6ed",
-  lgas: 
-  [
-  { name: "Aba South", id: "4c840cb1-8f58-40d3-9aff-5a3b77fdba71" },
-  ...
-  ],
-  land_mass: "6,320 km²",
-  universities: 
-  [
-  { name: "Abia State University",
-    location: "Uturu",
-    type: "State",
-  },
-  ...
-  ],
-  airports: [],
-  geopolitical_zone: "South East",
-}
-*/
+getAllStatesInfo();
+// => [
+//   {
+//     name: "Abia",
+//     capital: "Umuahia",
+//     id: "2e14a7ed-349a-44f6-9e12-abfec3e5f6ed",
+//     lgas: [...],
+//     land_mass: "6,320 km²",
+//     universities: [...],
+//     airports: [],
+//     geopolitical_zone: "South East",
+//   },
+//   ...
+// ]
 ```
 
-### Fetch all states
+### Get all states (name + ID only)
 
-```js
-import { useAllStates } from "use-nigeria-location";
+```ts
+import { getAllStates } from "nigeria-locations";
 
-console.log(useAllStates())
-/* => 
-[ 
-  { name: "Abia", id: "2e14a7ed-349a-44f6-9e12-abfec3e5f6ed" },
-  { name: "Adamawa", id: "3ac495b8-4196-4126-bf9e-bb8d43a0355d" },
-  { name: "Akwa Ibom", id: "b6ed5429-7677-4aad-bf2a-97ce4f211494" },
-
-... ]
-*/
+getAllStates();
+// => [
+//   { name: "Abia", id: "2e14a7ed-349a-44f6-9e12-abfec3e5f6ed" },
+//   { name: "Adamawa", id: "3ac495b8-4196-4126-bf9e-bb8d43a0355d" },
+//   ...
+// ]
 ```
 
-### Fetch single state
+### Get full info for a single state
 
-```js
-import { useSingleState } from "use-nigeria-location";
+```ts
+import { getStateInfo } from "nigeria-locations";
 
-// takes state ID parameter
+getStateInfo("Lagos");
+// => { name: "Lagos", capital: "Ikeja", id: "...", lgas: [...], ... }
 
-console.log(useSingleState("2e14a7ed-349a-44f6-9e12-abfec3e5f6ed"))
-// => { name: "Abia", id: "2e14a7ed-349a-44f6-9e12-abfec3e5f6ed" }
+getStateInfo("not-a-state");
+// => "State not found. Check the ID or name passed."
 ```
 
-### Fetch capital of single state
+### Get a state (name + ID only)
 
-```js
-import { useStateCapital } from "use-nigeria-location";
+```ts
+import { getState } from "nigeria-locations";
 
-// takes state ID parameter
-
-console.log(useStateCapital("2e14a7ed-349a-44f6-9e12-abfec3e5f6ed")) 
-// => "Umuahia"
+getState("Lagos");
+// => { name: "Lagos", id: "..." }
 ```
 
-### Fetch all lgas from single state
+### Get capital of a state
 
-```js
-import { useStateLGAs } from "use-nigeria-location";
+```ts
+import { getStateCapital } from "nigeria-locations";
 
-// takes state ID parameter
-console.log(useStateLGAs("2e14a7ed-349a-44f6-9e12-abfec3e5f6ed"))
-/* => 
-[
-  { name: "Aba South", id: "4c840cb1-8f58-40d3-9aff-5a3b77fdba71" },
-  { name: "Arochukwu", id: "f46f5f01-43e1-440c-84a5-72382d0e6b94" },
-  { name: "Bende", id: "836932e0-0aa7-4f7c-a3ef-44b5d30775c4" },
-
-  ...
-]
-*/
+getStateCapital("Ogun"); // => "Abeokuta"
 ```
 
-### Fetch single lga in single state
+### Get land mass of a state
 
-```js
-import { useSingleLGA } from "use-nigeria-location";
+```ts
+import { getStateLandMass } from "nigeria-locations";
 
-// takes state ID parameter and LGA ID parameter
-console.log(useSingleLGA("2e14a7ed-349a-44f6-9e12-abfec3e5f6ed", "4c840cb1-8f58-40d3-9aff-5a3b77fdba71"))
+getStateLandMass("Rivers"); // => "11,077 km²"
+```
+
+### Get geo-political zone of a state
+
+```ts
+import { getStateGeoPoliticalZone } from "nigeria-locations";
+
+getStateGeoPoliticalZone("Kano"); // => "North West"
+```
+
+### Get all LGAs in a state
+
+```ts
+import { getStateLGAs } from "nigeria-locations";
+
+getStateLGAs("Abia");
+// => [
+//   { name: "Aba South", id: "4c840cb1-..." },
+//   { name: "Arochukwu", id: "f46f5f01-..." },
+//   ...
+// ]
+```
+
+### Get a single LGA
+
+```ts
+import { getLGA } from "nigeria-locations";
+
+// By state name + LGA name
+getLGA("Abia", "Aba South");
 // => { name: "Aba South", id: "4c840cb1-8f58-40d3-9aff-5a3b77fdba71" }
+
+// By state ID + LGA ID
+getLGA("2e14a7ed-...", "4c840cb1-...");
+// => { name: "Aba South", id: "4c840cb1-..." }
+
+// Mixed is also fine
+getLGA("Abia", "4c840cb1-...");
+// => { name: "Aba South", id: "4c840cb1-..." }
 ```
 
-### Fetch land mass of single state
+### Get all universities in a state
+
+```ts
+import { getStateUniversities } from "nigeria-locations";
+
+getStateUniversities("Abia");
+// => [
+//   { name: "Abia State University", location: "Uturu", type: "State" },
+//   { name: "Michael Okpara University of Agriculture", location: "Umudike", type: "Federal" },
+// ]
+```
+
+### Get all airports in a state
+
+```ts
+import { getStateAirports } from "nigeria-locations";
+
+getStateAirports("Lagos");
+// => [
+//   { name: "Murtala Muhammed International Airport", IATA_code: "LOS", type: "International" },
+// ]
+```
+
+---
+
+## API Reference
+
+All functions return the result directly or a `string` error message when the lookup fails.
+
+| Function | Parameters | Returns |
+|---|---|---|
+| `getAllStatesInfo()` | — | `TStateInfo[]` |
+| `getAllStates()` | — | `TState[]` |
+| `getStateInfo(idOrName)` | `string` | `TStateInfo \| string` |
+| `getState(idOrName)` | `string` | `TState \| string` |
+| `getStateCapital(idOrName)` | `string` | `string` |
+| `getStateLandMass(idOrName)` | `string` | `string` |
+| `getStateGeoPoliticalZone(idOrName)` | `string` | `string` |
+| `getStateLGAs(idOrName)` | `string` | `TLGA[] \| string` |
+| `getLGA(stateIdOrName, lgaIdOrName)` | `string, string` | `TLGA \| string` |
+| `getStateUniversities(idOrName)` | `string` | `TUniversity[] \| string` |
+| `getStateAirports(idOrName)` | `string` | `TAirport[] \| string` |
+
+### Types
+
+```ts
+type TStateInfo = {
+  name: string;
+  capital: string;
+  id: string;
+  lgas: TLGA[];
+  land_mass: string;
+  universities: TUniversity[];
+  airports: TAirport[];
+  geopolitical_zone: string;
+};
+
+type TState = { name: string; id: string };
+
+type TLGA = { name: string; id: string };
+
+type TUniversity = { name: string; location: string; type: string };
+
+type TAirport = { name: string; IATA_code: string; type: string };
+```
+
+---
+
+## CommonJS usage
 
 ```js
-import { useStateLandMass } from "use-nigeria-location";
-
-// takes state ID parameter
-
-console.log(useStateLandMass("2e14a7ed-349a-44f6-9e12-abfec3e5f6ed")) 
-// => "6,320 km²"
+const { getAllStates, getStateCapital } = require("nigeria-locations");
 ```
 
-### Fetch all universities in single state
-
-```js
-import { useStateUnis } from "use-nigeria-location";
-
-// takes state ID parameter
-
-console.log(useStateUnis("2e14a7ed-349a-44f6-9e12-abfec3e5f6ed")) 
-/* => 
-[
-  { 
-  name: "Abia State University",
-  location: "Uturu",
-  type: "State",
-  },
-  {
-  name: "Michael Okpara University of Agriculture",
-  location: "Umudike",
-  type: "Federal",
-  },
-]
-*/
-```
-
-### Fetch all airports in single state
-
-```js
-import { useStateAirports } from "use-nigeria-location";
-
-// takes state ID parameter
-
-console.log(useStateAirports("2e14a7ed-349a-44f6-9e12-abfec3e5f6ed")) 
-// => []
-```
-
-### Fetch geo-political zone of single state
-
-```js
-import { useStateGeoPoli } from "use-nigeria-location";
-
-// takes state ID parameter
-
-console.log(useStateGeoPoli("2e14a7ed-349a-44f6-9e12-abfec3e5f6ed")) 
-// => "South East"
-```
-
-## Author
-
-### Muiz Haruna or DEVDESIIGNN
-
-#### **Connect with me:**
-
-[![Twitter: @dev_desiignn](https://img.shields.io/badge/twitter-1D9BF0?style=for-the-badge&logo=X&logoColor=white)](https://twitter.com/dev_desiignn) [![Facebook: @devdesiignnn](https://img.shields.io/badge/facebook-0866FF?style=for-the-badge&logo=facebook&logoColor=white)](https://facebook.com/devdesiignnn) [![LinkedIn: @devdesiignn](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/devdesiignn/)
+---
 
 ## License
 
-Copyright © 2024 [Muiz Haruna](https://github.com/devdesiignn/).
-
-This project is licensed under the MIT License.
-
-Thank you for using this package. 🔥 && 🧊
+MIT © [Muiz Haruna](https://github.com/devdesiignn)
